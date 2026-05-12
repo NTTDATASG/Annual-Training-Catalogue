@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FY26 Training Catalogue | NTT DATA</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #003087;
+  --red: #E8371B;
+  --dark: #070F26;
+  --white: #FFFFFF;
+  --bg: #F8F8FB;
+  --card-bg: #FFFFFF;
+  --border: #E4E4EC;
+  --muted: #8A8A9A;
+  --sr: #1A1A2E;
+  --mgr: #E8371B;
+  --teal: #057A85;
+  --purple: #5A187A;
+  --all: #003087;
+  --sales: #C0392B;
+  --delivery: #5A187A;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--dark);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* HEADER */
+.header {
+  background: var(--navy);
+  padding: 2.5rem 3rem 2rem;
+  position: relative;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--red);
+}
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.header h1 {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  color: var(--white);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.header .subtitle {
+  color: rgba(255,255,255,0.55);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+.header .logo {
+  color: rgba(255,255,255,0.75);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* FILTER BAR */
+.filter-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.filter-bar label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+.filter-bar select {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 0.6rem 2.5rem 0.6rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 50px;
+  background: var(--white);
+  color: var(--dark);
+  font-weight: 500;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8A9A' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  transition: border-color 0.2s;
+  min-width: 280px;
+}
+.filter-bar select:focus {
+  outline: none;
+  border-color: var(--navy);
+}
+.filter-count {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-left: auto;
+}
+.filter-count span {
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* LEGEND */
+.legend {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 3rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* CALENDAR */
+.calendar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 3rem 3rem;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 900px) {
+  .calendar-grid { grid-template-columns: repeat(2, 1fr); }
+  .filter-bar, .legend, .calendar { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .header { padding-left: 1.5rem; padding-right: 1.5rem; }
+}
+@media (max-width: 550px) {
+  .calendar-grid { grid-template-columns: 1fr; }
+}
+
+/* MONTH CARD */
+.month-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.month-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,48,135,0.08);
+}
+.month-header {
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--white);
+  background: var(--navy);
+  letter-spacing: 0.02em;
+}
+.month-body {
+  padding: 0.75rem;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.month-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  color: var(--border);
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* COURSE BUBBLE — iMessage style */
+.bubble {
+  padding: 0.55rem 0.85rem;
+  border-radius: 18px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.35;
+  position: relative;
+  cursor: default;
+  transition: transform 0.12s, opacity 0.3s;
+  animation: bubbleIn 0.3s ease-out both;
+}
+.bubble:hover {
+  transform: scale(1.02);
+}
+.bubble.hidden {
+  display: none;
+}
+.bubble .bubble-date {
+  font-size: 0.65rem;
+  opacity: 0.75;
+  margin-top: 0.2rem;
+  font-weight: 400;
+}
+.bubble .bubble-type {
+  font-size: 0.6rem;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.15rem;
+}
+
+/* Bubble colors */
+.bubble[data-cat="all"]       { background: var(--all); }
+.bubble[data-cat="mgr"]      { background: var(--mgr); }
+.bubble[data-cat="sr"]       { background: var(--sr); }
+.bubble[data-cat="delivery"] { background: var(--delivery); }
+.bubble[data-cat="teal"]     { background: var(--teal); }
+.bubble[data-cat="purple"]   { background: var(--purple); }
+.bubble[data-cat="sales"]    { background: var(--sales); }
+
+@keyframes bubbleIn {
+  from { opacity: 0; transform: scale(0.9) translateY(6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* TOOLTIP on hover */
+.bubble[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--dark);
+  color: var(--white);
+  font-size: 0.7rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+  white-space: nowrap;
+  max-width: 280px;
+  white-space: normal;
+  z-index: 10;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Footer */
+.footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 3rem 2rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer .note { font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div>
+      <h1>FY26 Training Catalogue</h1>
+      <div class="subtitle">Individual Learning Plan for Employees</div>
+    </div>
+    <div class="logo">NTT DATA</div>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <label for="roleFilter">I am a</label>
+  <select id="roleFilter">
+    <option value="all-view">Show All Courses</option>
+    <option value="all-emp">All Employees</option>
+    <option value="people-mgr">People Manager</option>
+    <option value="senior-mgr">Senior Manager & Above (N4+)</option>
+    <option value="delivery-mgr">Delivery Manager</option>
+    <option value="team-lead">Team Lead / Newly Promoted Manager</option>
+    <option value="client-facing">Project Engineer / Client-Facing</option>
+    <option value="solution-arch">Solution Architect / Engineer</option>
+    <option value="sales-role">Sales</option>
+  </select>
+  <div class="filter-count">Showing <span id="courseCount">21</span> courses</div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--all)"></div>All Employees</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--mgr)"></div>People Managers</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--sr)"></div>Senior Manager+</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--delivery)"></div>Delivery Managers</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div>Team Leads / Client-Facing</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>Solution Architects</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--sales)"></div>Sales</div>
+</div>
+
+<div class="calendar">
+  <div class="calendar-grid" id="calendarGrid"></div>
+</div>
+
+<div class="footer">
+  <div class="note">*Dates are subject to change</div>
+  <div>© 2026 NTT DATA, Inc.</div>
+</div>
+
+<script>
+const courses = [
+  // Leadership Development — Virtual Bite-Sized
+  { title: "Competency-based Interview Skills", date: "July 2026", month: 7, year: 2026, audience: "All People Managers", cat: "mgr", type: "Leadership · Virtual", roles: ["people-mgr","senior-mgr","delivery-mgr","team-lead"] },
+  { title: "Get to the Point Communication and Active Listening", date: "August 2026", month: 8, year: 2026, audience: "All People Managers", cat: "mgr", type: "Leadership · Virtual", roles: ["people-mgr","senior-mgr","delivery-mgr","team-lead"] },
+  { title: "Giving & Providing Constructive Feedback (Managing Difficult Conversations)", date: "October 2026", month: 10, year: 2026, audience: "All People Managers", cat: "mgr", type: "Leadership · Virtual", roles: ["people-mgr","senior-mgr","delivery-mgr","team-lead"] },
+  { title: "Building Trust & Psychological Safety", date: "November 2026", month: 11, year: 2026, audience: "All People Managers", cat: "mgr", type: "Leadership · Virtual", roles: ["people-mgr","senior-mgr","delivery-mgr","team-lead"] },
+  { title: "Personal Leadership Presence & Confidence", date: "December 2026", month: 12, year: 2026, audience: "All People Managers", cat: "mgr", type: "Leadership · Virtual", roles: ["people-mgr","senior-mgr","delivery-mgr","team-lead"] },
+
+  // Leadership Development — Classroom
+  { title: "Strategic Thinking and Business Acumen", date: "22–23 June 2026", month: 6, year: 2026, audience: "N4, Senior Manager and above", cat: "sr", type: "Leadership · Classroom", roles: ["senior-mgr"] },
+  { title: "Critical Thinking and Analytical Skills", date: "13–14 July 2026", month: 7, year: 2026, audience: "N4, Senior Manager and above (open to PMs)", cat: "sr", type: "Leadership · Classroom", roles: ["senior-mgr","people-mgr"] },
+  { title: "System Leadership", date: "20 July 2026", month: 7, year: 2026, audience: "People Managers (1–2.5 hours)", cat: "mgr", type: "Leadership · Classroom", roles: ["people-mgr","senior-mgr"] },
+  { title: "Systems Leadership for Delivery Managers", date: "17 August 2026", month: 8, year: 2026, audience: "People Managers (Delivery)", cat: "delivery", type: "Leadership · Classroom", roles: ["delivery-mgr"] },
+  { title: "Leading Design Thinking", date: "10 September 2026", month: 9, year: 2026, audience: "People Managers", cat: "mgr", type: "Leadership · Classroom", roles: ["people-mgr","senior-mgr"] },
+  { title: "New Team Lead Program (3 half-day sessions)", date: "2 Oct, 2 Nov, 2 Dec 2026", month: 10, year: 2026, audience: "Team Lead and Newly Promoted Managers", cat: "teal", type: "Leadership · Classroom", roles: ["team-lead"] },
+  { title: "Managing Digital Technology for Business Resiliency (Digital Workplace 2.0)", date: "5–6 November 2026", month: 11, year: 2026, audience: "People Managers", cat: "mgr", type: "Leadership · Classroom", roles: ["people-mgr","senior-mgr"] },
+  { title: "Effective Manager Program (EMP)", date: "7–8 December 2026", month: 12, year: 2026, audience: "Senior Manager and above", cat: "sr", type: "Leadership · Classroom", roles: ["senior-mgr"] },
+
+  // Professional Skill Development — Classroom
+  { title: "Effective Communication: The Role of Context", date: "16 June 2026", month: 6, year: 2026, audience: "All Employees", cat: "all", type: "Professional · Classroom", roles: ["all-emp","people-mgr","senior-mgr","delivery-mgr","team-lead","client-facing","solution-arch","sales-role"] },
+  { title: "GenAI (ChatGPT): Prompt Engineering", date: "6 July 2026", month: 7, year: 2026, audience: "All Employees (2–2.5 hours)", cat: "all", type: "Professional · Classroom", roles: ["all-emp","people-mgr","senior-mgr","delivery-mgr","team-lead","client-facing","solution-arch","sales-role"] },
+  { title: "Systems Thinking", date: "3 August 2026", month: 8, year: 2026, audience: "All Employees (1–2.5 hours)", cat: "all", type: "Professional · Classroom", roles: ["all-emp","people-mgr","senior-mgr","delivery-mgr","team-lead","client-facing","solution-arch","sales-role"] },
+  { title: "Critical and Design Thinking", date: "12 August 2026", month: 8, year: 2026, audience: "All Employees", cat: "all", type: "Professional · Classroom", roles: ["all-emp","people-mgr","senior-mgr","delivery-mgr","team-lead","client-facing","solution-arch","sales-role"] },
+  { title: "Client Centricity", date: "23 September 2026", month: 9, year: 2026, audience: "Project Engineers and Client-Facing Employees", cat: "teal", type: "Professional · Classroom", roles: ["client-facing"] },
+  { title: "Systems Thinking for Projects / Pre-Sales", date: "8 October 2026", month: 10, year: 2026, audience: "Solution Architects / Engineers", cat: "purple", type: "Professional · Classroom", roles: ["solution-arch"] },
+  { title: "Sales Engagement & Influencing Techniques", date: "18 November 2026", month: 11, year: 2026, audience: "Sales", cat: "sales", type: "Professional · Classroom", roles: ["sales-role"] },
+  { title: "Managing Up: Building Effective Working Relationship with Your Supervisor", date: "18 January 2027", month: 1, year: 2027, audience: "All Employees", cat: "all", type: "Professional · Classroom", roles: ["all-emp","people-mgr","senior-mgr","delivery-mgr","team-lead","client-facing","solution-arch","sales-role"] },
+
+  // Professional Skill Development — Virtual Bite-Sized
+  { title: "Receiving Feedback for Growth", date: "August 2026", month: 8, year: 2026, audience: "All Employees", cat: "all", type: "Professional · Virtual", roles: ["all-emp","people-mgr","senior-mgr","delivery-mgr","team-lead","client-facing","solution-arch","sales-role"] },
+  { title: "Turning Feedback into Action", date: "September 2026", month: 9, year: 2026, audience: "All Employees", cat: "all", type: "Professional · Virtual", roles: ["all-emp","people-mgr","senior-mgr","delivery-mgr","team-lead","client-facing","solution-arch","sales-role"] },
+  { title: "Enhancing People Mastery: Building Connections at Work", date: "October 2026", month: 10, year: 2026, audience: "All Employees", cat: "all", type: "Professional · Virtual", roles: ["all-emp","people-mgr","senior-mgr","delivery-mgr","team-lead","client-facing","solution-arch","sales-role"] },
+];
+
+const months = [
+  { month: 6, year: 2026, label: "June 2026" },
+  { month: 7, year: 2026, label: "July 2026" },
+  { month: 8, year: 2026, label: "August 2026" },
+  { month: 9, year: 2026, label: "September 2026" },
+  { month: 10, year: 2026, label: "October 2026" },
+  { month: 11, year: 2026, label: "November 2026" },
+  { month: 12, year: 2026, label: "December 2026" },
+  { month: 1, year: 2027, label: "January 2027" },
+];
+
+function render(filter) {
+  const grid = document.getElementById('calendarGrid');
+  grid.innerHTML = '';
+  let totalVisible = 0;
+
+  months.forEach(({ month, year, label }) => {
+    const card = document.createElement('div');
+    card.className = 'month-card';
+
+    const header = document.createElement('div');
+    header.className = 'month-header';
+    header.textContent = label;
+    card.appendChild(header);
+
+    const body = document.createElement('div');
+    body.className = 'month-body';
+
+    const monthCourses = courses.filter(c => c.month === month && c.year === year);
+    const visible = monthCourses.filter(c => filter === 'all-view' || c.roles.includes(filter));
+
+    if (visible.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'month-empty';
+      empty.textContent = 'No courses this month';
+      body.appendChild(empty);
+    } else {
+      visible.forEach((c, i) => {
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        bubble.setAttribute('data-cat', c.cat);
+        bubble.style.animationDelay = `${i * 0.06}s`;
+        bubble.innerHTML = `
+          <div>${c.title}</div>
+          <div class="bubble-date">${c.date}</div>
+          <div class="bubble-type">${c.type}</div>
+        `;
+        bubble.title = `${c.audience}`;
+        body.appendChild(bubble);
+        totalVisible++;
+      });
+    }
+
+    card.appendChild(body);
+    grid.appendChild(card);
+  });
+
+  document.getElementById('courseCount').textContent = totalVisible;
+}
+
+document.getElementById('roleFilter').addEventListener('change', (e) => {
+  render(e.target.value);
+});
+
+render('all-view');
+</script>
+</body>
+</html>
